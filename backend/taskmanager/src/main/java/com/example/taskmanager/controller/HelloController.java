@@ -5,6 +5,8 @@ import com.example.taskmanager.model.Task;
 import com.example.taskmanager.service.TaskServices;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class HelloController {
 
@@ -25,14 +27,15 @@ public class HelloController {
 
 //   post APIs
 
-// test inComplete POSTMAN STATUS == FALSE
+// test inComplete POSTMAN STATUS == TRUE
 
-
-
-
-    
     @PostMapping("/task")
     public Task createTask(@RequestBody Task task){
         return taskServices.createTask(task);
+    }
+
+    @GetMapping("/task")
+    public List<Task> getAllTask(){
+        return taskServices.getAllTask();
     }
 }

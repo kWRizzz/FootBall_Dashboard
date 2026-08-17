@@ -5,6 +5,8 @@ import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskServices {
 
@@ -15,7 +17,12 @@ public class TaskServices {
         this.taskRepository=taskRepository;
     }
 
+//    @POST creating task
     public Task createTask(Task task){
         return taskRepository.save(task);
+    }
+
+    public List<Task> getAllTask(){
+        return taskRepository.findAll();
     }
 }
