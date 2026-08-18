@@ -43,4 +43,9 @@ public class HelloController {
     public Task getTaskById(@PathVariable Long id){
         return  taskServices.gerTaskById(id);
     }
+
+    @PutMapping("/task/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task task){
+        return taskServices.updateTask(id,task);
+    }
 }

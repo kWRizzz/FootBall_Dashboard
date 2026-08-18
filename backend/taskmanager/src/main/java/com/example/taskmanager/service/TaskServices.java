@@ -29,4 +29,13 @@ public class TaskServices {
     public Task gerTaskById(Long id){
         return taskRepository.findById(id).orElseThrow(()-> new RuntimeException("Task Not Found"));
     }
+
+    public Task updateTask(Long id , Task updatedTask){
+        Task existingTask= taskRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot delete it"));
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setCompleted(updatedTask.isCompleted());
+
+        return taskRepository.save(existingTask);
+    }
 }
