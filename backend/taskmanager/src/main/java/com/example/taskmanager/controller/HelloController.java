@@ -38,4 +38,9 @@ public class HelloController {
     public List<Task> getAllTask(){
         return taskServices.getAllTask();
     }
+
+    @GetMapping("/task/{id}")
+    public Task getTaskById(@PathVariable Long id){
+        return  taskServices.gerTaskById(id);
+    }
 }
