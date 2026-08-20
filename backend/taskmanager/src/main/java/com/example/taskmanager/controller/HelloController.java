@@ -3,6 +3,7 @@ package com.example.taskmanager.controller;
 
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.service.TaskServices;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class HelloController {
 // test inComplete POSTMAN STATUS == TRUE
 
     @PostMapping("/task")
-    public Task createTask(@RequestBody Task task){
+    public Task createTask(@Valid @RequestBody Task task){
         return taskServices.createTask(task);
     }
 
