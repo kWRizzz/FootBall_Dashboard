@@ -40,8 +40,6 @@ public class HelloController {
     }
 
 
-    
-
     @GetMapping("/task/{id}")
     public Task getTaskById(@PathVariable Long id){
         return  taskServices.gerTaskById(id);
@@ -50,5 +48,11 @@ public class HelloController {
     @PutMapping("/task/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task task){
         return taskServices.updateTask(id,task);
+    }
+
+    @DeleteMapping("/task/{id}")
+    public String deleteTask(@PathVariable Long id){
+          taskServices.deleteTask(id);
+          return "Task delete";
     }
 }
