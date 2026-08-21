@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
   const [task, setTask] = useState([])
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-      fetch('http://localhost:9000/tasks').then(response=>response.json()).then(data=>setTask(data));
+      fetch('http://localhost:9000/task')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => setTask(data))
+        .catch(err => {
+          console.error("Failed to fetch tasks:", err);
+          setError(err.message);
+        });
   }, [])
   
   return (
@@ -18,19 +27,21 @@ function App() {
         <h1>
           Task Manager
         </h1>
+
+        {error && <p style={{color: 'red'}}>Error: {error}</p>}
         
         <div>
             {
-              task.map(task=>(
+              task.map(t => (
                 <div
-                  key={task.id}
+                  key={t.id}
                 >
                   <h2>
-                     {task.tilte}
+                     {t.title}
                   </h2>
                   <p>
                     {
-                      task.completed ? "Completed":"Pending"
+                      t.completed ? "Completed" : "Pending"
                     }
                   </p>
                 </div>
