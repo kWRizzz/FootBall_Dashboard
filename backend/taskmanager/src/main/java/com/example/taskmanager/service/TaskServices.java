@@ -1,6 +1,7 @@
 package com.example.taskmanager.service;
 
 
+import com.example.taskmanager.dto.TaskRequest;
 import com.example.taskmanager.exception.TaskNotFoundException;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
@@ -19,8 +20,15 @@ public class TaskServices {
     }
 
 //    @POST creating task
-    public Task createTask(Task task){
-        return taskRepository.save(task);
+    public Task createTask(TaskRequest request){
+
+//        return taskRepository.save(task);
+
+        Task task =new Task(
+                request.getTitle(),
+                request.isCompleted()
+        );
+        return  taskRepository.save(task);
     }
 
     public List<Task> getAllTask(){

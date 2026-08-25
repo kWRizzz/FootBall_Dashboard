@@ -17,9 +17,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotBlank(message = "Title is required")
-    @Size(min = 3 ,max = 100,message = "Enter in between range ")
+//
+//    @NotBlank(message = "Title is required")
+//    @Size(min = 3 ,max = 100,message = "Enter in between range ")
     private String title;
     private boolean completed;
     public Task(){

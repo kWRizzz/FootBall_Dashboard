@@ -1,6 +1,7 @@
 package com.example.taskmanager.controller;
 
 
+import com.example.taskmanager.dto.TaskRequest;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.service.TaskServices;
 import jakarta.validation.Valid;
@@ -32,8 +33,8 @@ public class HelloController {
 // test inComplete POSTMAN STATUS == TRUE
 
     @PostMapping("/task")
-    public Task createTask(@Valid @RequestBody Task task){
-        return taskServices.createTask(task);
+    public Task createTask(@Valid @RequestBody TaskRequest request){
+        return taskServices.createTask(request);
     }
 
     @GetMapping("/task")
