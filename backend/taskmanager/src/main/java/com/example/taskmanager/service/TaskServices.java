@@ -2,7 +2,9 @@ package com.example.taskmanager.service;
 
 
 import com.example.taskmanager.dto.TaskRequest;
+import com.example.taskmanager.dto.TaskResponse;
 import com.example.taskmanager.exception.TaskNotFoundException;
+import com.example.taskmanager.mapper.TaskMapper;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -14,13 +16,16 @@ public class TaskServices {
 
 //  Future dataBase inclusion pending
     private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
-    public TaskServices(TaskRepository taskRepository){
+
+    public TaskServices(TaskRepository taskRepository , TaskMapper taskMapper){
         this.taskRepository=taskRepository;
+        this.taskMapper=taskMapper;
     }
 
 //    @POST creating task
-    public Task createTask(TaskRequest request){
+    public TaskResponse createTask(TaskRequest request){
 
 //        return taskRepository.save(task);
 
@@ -28,7 +33,10 @@ public class TaskServices {
                 request.getTitle(),
                 request.isCompleted()
         );
-        return  taskRepository.save(task);
+
+        Task savedTask= taskRepository.save(task);
+
+        return  taskMapper.toResponse(savedTask);
     }
 
     public List<Task> getAllTask(){
