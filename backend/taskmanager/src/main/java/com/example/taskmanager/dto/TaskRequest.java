@@ -5,8 +5,8 @@ import jakarta.validation.constraints.Size;
 
 public class TaskRequest {
 
-    @NotBlank(message = "ENter some input")
-    @Size(min = 3,max = 6,message = "Range of size 3 to 6")
+    @NotBlank(message = "Enter some input")
+    @Size(min = 3,max = 100,message = "Range of size 3 to 6")
 
     private String title;
     private boolean completed;
