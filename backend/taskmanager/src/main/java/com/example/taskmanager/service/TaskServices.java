@@ -39,22 +39,31 @@ public class TaskServices {
         return  taskMapper.toResponse(savedTask);
     }
 
-    public List<Task> getAllTask(){
-        return taskRepository.findAll();
+    public List<TaskResponse> getAllTask(){
+        return taskRepository.findAll()
+                .stream()
+                .map(taskMapper::toResponse)
+                .toList();
     }
 
-    public Task gerTaskById(Long id){
-        return taskRepository.findById(id).orElseThrow(()-> new TaskNotFoundException("Task Not Found" + id));
+    public TaskResponse gerTaskById(Long id){
+        Task task =taskRepository.findById(id)
+                .orElseThrow(()-> new TaskNotFoundException("Task Not Found" + id));
+        return taskMapper.toResponse(task);
     }
 
-    public Task updateTask(Long id , Task updatedTask){
-        Task existingTask= taskRepository.findById(id).orElseThrow(()-> new TaskNotFoundException("Cannot delete it" + id ));
+    public TaskResponse updateTask(Long id , Task updatedTask){
+        Task existingTask= taskRepository.findById(id)
+                .orElseThrow(()-> new TaskNotFoundException("Cannot delete it" + id ));
 
         existingTask.setTitle(updatedTask.getTitle());
         existingTask.setCompleted(updatedTask.isCompleted());
 
-        return taskRepository.save(existingTask);
-    }
+        Task updatedTasks=taskRepository.save(existingTask);
+
+//        return taskRepository.save(existingTask);
+        return  taskMapper.toResponse(updatedTasks);
+        }
 
     public void deleteTask(Long id){
         Task task = taskRepository.findById(id).orElseThrow(()-> new TaskNotFoundException("Task Not FOund" + id));
