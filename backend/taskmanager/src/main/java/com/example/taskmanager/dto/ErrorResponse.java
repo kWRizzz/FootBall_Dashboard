@@ -8,12 +8,11 @@ public class ErrorResponse {
     private String message;
     private LocalDateTime timestamp;
 
-    private ErrorResponse(int status, String message){
+    public ErrorResponse(int status, String message){
         this.status=status;
         this.message=message;
         this.timestamp= LocalDateTime.now();
     }
-
 
     public int getStatus() {
         return status;
