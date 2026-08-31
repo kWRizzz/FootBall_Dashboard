@@ -1,10 +1,7 @@
 package com.example.taskmanager.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -22,6 +19,11 @@ public class Task {
 //    @Size(min = 3 ,max = 100,message = "Enter in between range ")
     private String title;
     private boolean completed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Task(){
     }
 
