@@ -2,6 +2,8 @@ package com.example.taskmanager.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -13,6 +15,9 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 
     public User(){}
 
