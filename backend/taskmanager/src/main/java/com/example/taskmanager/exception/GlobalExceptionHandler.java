@@ -9,15 +9,26 @@ import org.springframework.web.bind.annotation.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(TaskNotFoundException.class )
+    @ExceptionHandler(TaskNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleTaskNotFoundException(TaskNotFoundException ex){
+            return new ErrorResponse(
+                    404,
+                    ex.getMessage()
+            );
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidationException(MethodArgumentNotValidException ex){
-//        return ex.getMessage();
+            String message = ex.getBindingResult()
+                    .getFieldErrors()
+                    .get(0)
+                    .getDefaultMessage();
 
             return new ErrorResponse(
                     400,
-                    ex.getMessage()
+                    message
             );
-
     }
 }

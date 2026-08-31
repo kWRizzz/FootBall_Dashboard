@@ -39,14 +39,14 @@ public class HelloController {
     }
 
     @GetMapping("/task")
-    public List<Task> getAllTask(){
+    public List<TaskResponse> getAllTask(){
         return taskServices.getAllTask();
 
     }
 
 
     @GetMapping("/task/{id}")
-    public Task getTaskById(@PathVariable Long id){
+    public TaskResponse getTaskById(@PathVariable Long id){
         return  taskServices.gerTaskById(id);
 
 //        Task task= taskR
@@ -54,7 +54,7 @@ public class HelloController {
     }
 
     @PutMapping("/task/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task){
+    public TaskResponse updateTask(@PathVariable Long id, @RequestBody Task task){
         return taskServices.updateTask(id,task);
     }
 
