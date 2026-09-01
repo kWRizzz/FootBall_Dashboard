@@ -6,7 +6,9 @@ import com.example.taskmanager.dto.TaskResponse;
 import com.example.taskmanager.exception.TaskNotFoundException;
 import com.example.taskmanager.mapper.TaskMapper;
 import com.example.taskmanager.model.Task;
+import com.example.taskmanager.model.User;
 import com.example.taskmanager.repository.TaskRepository;
+import com.example.taskmanager.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +19,12 @@ public class TaskServices {
 //  Future dataBase inclusion pending
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final UserRepository userRepository;
 
-
-    public TaskServices(TaskRepository taskRepository , TaskMapper taskMapper){
+    public TaskServices(TaskRepository taskRepository , TaskMapper taskMapper, UserRepository userRepository){
         this.taskRepository=taskRepository;
         this.taskMapper=taskMapper;
+        this.userRepository=userRepository;
     }
 
 //    @POST creating task
@@ -29,10 +32,20 @@ public class TaskServices {
 
 //        return taskRepository.save(task);
 
+        User user= userRepository.findById(request.getUserId())
+                .orElseThrow(()->
+                        new RuntimeException("User not Found"));
+
         Task task =new Task(
                 request.getTitle(),
                 request.isCompleted()
         );
+
+
+//        Error Statuts not resolved
+
+
+//        task.setUser(user);
 
         Task savedTask= taskRepository.save(task);
 

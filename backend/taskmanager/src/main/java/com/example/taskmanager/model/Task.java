@@ -27,10 +27,20 @@ public class Task {
     public Task(){
     }
 
-    public Task(String title, Boolean completed){
+    public Task(String title, Boolean completed ){
         this.title=title;
         this.completed=completed;
     }
+
+
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public long getId() {
         return id;
