@@ -41,11 +41,7 @@ public class TaskServices {
                 request.isCompleted()
         );
 
-
-//        Error Statuts not resolved
-
-
-//        task.setUser(user);
+        task.setUser(user);
 
         Task savedTask= taskRepository.save(task);
 
