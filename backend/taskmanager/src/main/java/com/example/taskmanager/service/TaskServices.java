@@ -83,4 +83,12 @@ public class TaskServices {
         taskRepository.delete(task);
     }
 
+
+    public List<TaskResponse> getTasksByUser(Long userId){
+        return taskRepository.findByUserId(userId)
+                .stream()
+                .map(taskMapper::toResponse)
+                .toList();
+    }
+
 }
